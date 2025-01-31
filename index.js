@@ -8,3 +8,7 @@ const PORT = process.env.PORT;
 app.listen(PORT, (req, res)=> {
   console.log('server is up')
 })
+
+app.get('/', (req, res)=>{
+  res.send('Welcome to the interest community web app')
+})
