@@ -7,6 +7,17 @@ app.use(express.json());
 const PORT = process.env.PORT;
 const uri = process.env.MONGO_URI;
 
-app.listen(PORT, (req, res)=> {
-  console.log('server is up')
-})
+const connect_db = async () => {
+  try {
+    await mongoose.connect(uri).then(() => {
+      console.log('db connected');
+    })
+  }catch(error){
+    console.log(error);
+  }
+}
+connect_db();
+
+
+
+export default app;
