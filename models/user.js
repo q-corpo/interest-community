@@ -11,6 +11,7 @@ const userSchema = new Schema({
     unique: true,
     index: true
   },
+  passwordHash: String,
   dob: Date,
   bio: String,
   location:{
