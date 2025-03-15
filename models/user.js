@@ -51,10 +51,14 @@ const userSchema = new Schema({
     default: true
   },
   tempProfile:[{type: mongoose.Schema.Types.ObjectId,  ref: 'Temp'}],
-  connections: {
-    type: String,
-    enum: ['people', 'clusters']
-  }
+  userConnections: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  clusterConnections: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Cluster'
+  }]
 
 })
 

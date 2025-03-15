@@ -10,8 +10,8 @@ todo
 - users can edit their profile information: bio, location, tags, social links
 - users can view their profile and other people's profiles they have pending / mutual connections with
 - users can create temp connection profiles to find people
-- users can see people they have matched with based on the different connection criteria they set
-- users can confirm connection requests from other users based on connection criteria already established earlier
+- users can see people they have matched with based on the different connection criteria they set \*
+- users can connect with potential matches from tag based searches \*
 - users can remove / delete connections from their connection lists
 - users can toggle on or off to signify if they are actively seeking connections
 - users can create clusters with unique tags as criteria for accepting connection requests
