@@ -50,7 +50,11 @@ const userSchema = new Schema({
     type: Boolean,
     default: true
   },
-  tempProfile:[{type: mongoose.Schema.Types.ObjectId,  ref: 'Temp'}]
+  tempProfile:[{type: mongoose.Schema.Types.ObjectId,  ref: 'Temp'}],
+  connections: {
+    type: String,
+    enum: ['people', 'clusters']
+  }
 
 })
 
