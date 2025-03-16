@@ -1,21 +1,5 @@
 # interest-community
 
-todo
-
-- users can sign up with a username, email and password(users from here on will automatically mean auth users)
-- users can login into the app to view their profile and other information
-- users can create / add tags to different categories to their profiles \*
-- users can remove tags in different categories from their profiles
-- users can find people based on similar categories \*
-- users can edit their profile information: bio, location, tags, social links
-- users can view their profile and other people's profiles they have pending / mutual connections with
-- users can create temp connection profiles to find people
-- users can see people they have matched with based on the different connection criteria they set \*
-- users can connect with potential matches from tag based searches \*
-- users can remove / delete connections from their connection lists
-- users can toggle on or off to signify if they are actively seeking connections
-- users can create clusters with unique tags as criteria for accepting connection requests
-- users can see clusters that fit their connection criteria based on set tags
-- users can join clusters that are relevant to them based on connection criteria
-- users can leave clusters if they wish too
--
+Cluster is a social platform designed to help people connect through shared interests, values, and activities rather than traditional social media profiles. It uses a structured semantic tagging system to enable precise and dynamic matching, allowing users to discover and engage with nearby communities, events, and discussions tailored to their specific interests.
+The project aims to implement a custom tag ontology to handle synonyms, context-based relationships, and multi-dimensional identity toggles.
+Future plans include advanced semantic search, decentralized moderation tools, and AI-driven tag enrichment to enhance user experience while maintaining privacy and control over identity representation.
