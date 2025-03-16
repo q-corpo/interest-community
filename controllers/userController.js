@@ -3,13 +3,58 @@ import Temp from '../models/tempProfile.js';
 import Tag from '../models/tag.js';
 import { matchUserBasedonTags } from '../services/userMatching.js';
 
-
+// edit profile
 const editUserProfile = async(req, res) => {
-  res.send('edit the user profile')
+  const {userId} = req.params;
+  const {userName, bio, location} = req.body;
+
+  try{
+    if(!userId){
+      return res.status(400).json({
+        success: false,
+        message: 'user id required'
+      })
+    }
+
+    if(!userName && !bio && !location){
+      return res.status(400).json({
+        success: false,
+        message: 'missing parameters for editinh profile'
+      });
+    };
+
+    let updateObject = {}
+    if (userName) updateObject.userName = userName;
+    if (bio) updateObject.bio = bio;
+    if (location) updateObject.location = location;
+
+    const editUser = await User.findByIdAndUpdate(userId, updateObject, {new: true});
+
+    if (!editUser){
+      return res.status(404).json({
+        success: false,
+        message: 'user does not exist'
+      });
+    };
+
+    return res.status(200).json({
+      success: true,
+      userProfile: editUser
+    });
+
+
+  }catch(error){
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
 };
-// view your profile
+
+
+// view profile
 const viewUserProfile = async(req, res) => {
-  const{userId} = req.body;
+  const{userId} = req.params;
 
   try{
     if(!userId){
