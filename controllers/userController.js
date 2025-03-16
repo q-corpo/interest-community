@@ -7,9 +7,35 @@ import { matchUserBasedonTags } from '../services/userMatching.js';
 const editUserProfile = async(req, res) => {
   res.send('edit the user profile')
 };
-
+// view your profile
 const viewUserProfile = async(req, res) => {
-  res.send('view user profile as it appears to potential connections when you fill in your information, potential connections too see the same thing')
+  const{userId} = req.body;
+
+  try{
+    if(!userId){
+      return res.status(404).json({
+        success: false,
+        message: 'user id required'
+      })
+    };
+
+    const userProfile = await User.findById(userId)
+    .populate(hobbies.tags)
+    .populate(interests.tags)
+    .populate(sexuality.tags)
+    .populate(values.tags)
+
+    return res.status(200).json({
+      success: true,
+      profile: userProfile
+    });
+
+  }catch(error){
+    return{
+      success: false,
+      message: error.message || 'could not find user with that id'
+    };
+  }
 }
 
 // finding connections based on tag criteria and visibility options
