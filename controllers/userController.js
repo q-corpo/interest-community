@@ -185,13 +185,63 @@ const addConnection = async(req, res) => {
 };
 
 
-
+// remove user connections from connection list
 const removeConnection = async(req, res) => {
-  res.send('remove a connection from connection list')
-}
+  const {connectionId} = req.body;
+  const {userId} = req.params;
 
-const toggleConnectionStatus = async(req, res)=> {
-  res.send('activate or deactivate connection toggle')
+  try {
+
+    if (!userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'user id required'
+      });
+    };
+
+    if (!connectionId || connectionId.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'connectionId required to remove connection'
+      });
+    };
+
+    const thisUser = await User.findById(userId);
+
+    if(!thisUser){
+      return res.status(404).json({
+        success: false,
+        message: 'user does not exist'
+      });
+    };
+
+    const connectionExist = thisUser.userConnections.some(connection => connection.toString() == connectionId.toString())
+    if(!connectionExist){
+      return res.status(404).json({
+        success: false,
+        message: 'connection does not exist'
+      });
+    };
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {$pull: {userConnections: connectionId}},
+      {new: true},
+    )
+
+    return res.status(200).json({
+      success: true,
+      message: 'connection removed successfully',
+      connections: updatedUser.userConnections
+    });
+
+  }catch(error){
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
+
 };
 
 
@@ -199,10 +249,8 @@ const toggleConnectionStatus = async(req, res)=> {
 export  {
   editUserProfile,
   viewUserProfile,
-  createConnection,
   seeConnections,
   addConnection,
   removeConnection,
-  toggleConnectionStatus
 }
 
