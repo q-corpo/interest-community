@@ -3,7 +3,7 @@ import User from './user.js';
 import Tag from './tag.js'
 const Schema = mongoose.Schema;
 
-const clusterSchema = new Schema({
+const communitySchema = new Schema({
   name: {
     type: String,
     required: true
@@ -21,5 +21,5 @@ const clusterSchema = new Schema({
   }
 })
 
-const Cluster = mongoose.model('Cluster', clusterSchema);
-export default Cluster;
+const Community = mongoose.model('Community', communitySchema);
+export default Community;

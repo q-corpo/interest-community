@@ -55,9 +55,9 @@ const userSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   }],
-  clusterConnections: [{
+  communityConnections: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Cluster'
+    ref: 'community'
   }]
 
 })

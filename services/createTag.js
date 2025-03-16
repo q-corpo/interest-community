@@ -13,7 +13,7 @@ const createTag = async (tagData) => {
     if(!tag){
       throw new Error('must include tag')
     }
-
+// haven't added validation for the tags
     const validCategories = ['hobbies', 'interests', 'sexuality', 'values'];
 
     if(!validCategories.includes(category)){

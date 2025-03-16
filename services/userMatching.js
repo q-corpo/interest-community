@@ -1,7 +1,7 @@
 import User from '../models/user.js';
 import Temp from '../models/tempProfile.js';
 import Tag from '../models/tag.js';
-import Cluster from '../models/cluster.js';
+import Community from '../models/community.js';
 
 
 const matchUserBasedonTags = async(userId, tagIds, categories=['hobbies', 'interests','sexuality', 'values'], limit = 20) => {
