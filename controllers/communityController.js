@@ -159,6 +159,15 @@ const seePotentialCommunities = async (req, res) => {
 }
 
 /*
+join a community
+ */ 
+const joinCommunity = async(req, res)=> {
+  // find the community(ies)
+  // join the community
+  res.send('join a suggested community')
+};
+
+/*
 view your communities
  */ 
 const seeUserCommunities = async (req, res) => {
@@ -198,11 +207,11 @@ const seeUserCommunities = async (req, res) => {
   }
 };
 
-const joinCommunity = async(req, res)=> {
-  res.send('join a suggested community')
-};
 
 const leaveCommunity = async(req, res)=> {
+  // find the community
+  // check that user is part of the community
+  // remove user from the community
   res.send('leave a community')
 }
 
