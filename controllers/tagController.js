@@ -4,6 +4,9 @@ import Tag from '../models/tag.js';
 import { createTag, createTags } from '../services/createTag.js';
 
 
+/*
+create and add a tag to a user's profile
+ */ 
 const addTag = async(req, res) => {
   const {userId} = req.params;
   const {tagIds, category} = req.body;
@@ -63,7 +66,10 @@ const addTag = async(req, res) => {
   };
 };
 
-// remove tags from user profile
+
+/*
+remove tags from user profile
+ */ 
 const removeTag = async(req, res)=> {
   const {userId} = req.params;
   const {tagId, category} = req.body;

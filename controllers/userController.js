@@ -3,7 +3,12 @@ import Temp from '../models/tempProfile.js';
 import Tag from '../models/tag.js';
 import { matchUserBasedonTags } from '../services/userMatching.js';
 
-// edit profile
+
+/*
+
+edit user profile
+
+ */ 
 const editUserProfile = async(req, res) => {
   const {userId} = req.params;
   const {userName, bio, location} = req.body;
@@ -19,7 +24,7 @@ const editUserProfile = async(req, res) => {
     if(!userName && !bio && !location){
       return res.status(400).json({
         success: false,
-        message: 'missing parameters for editinh profile'
+        message: 'missing parameters for editing profile'
       });
     };
 
@@ -52,7 +57,10 @@ const editUserProfile = async(req, res) => {
 };
 
 
-// view profile
+
+/*
+view user profile
+ */ 
 const viewUserProfile = async(req, res) => {
   const{userId} = req.params;
 
@@ -83,7 +91,10 @@ const viewUserProfile = async(req, res) => {
   }
 }
 
-// finding connections based on tag criteria and visibility options
+
+/*
+find connections based on tags and visibility options
+ */ 
 const seeConnections = async(req, res) => {
   try{
     const {userId, tagIds, categories, limit} = req.body
@@ -176,16 +187,18 @@ const addConnection = async(req, res) => {
 
     
   } catch(error){
-    console.log('error handling connections')
+    return res.status(500).json({
+      success: false,
+      message: error.message || 'an error occured while handling connection requests'
+    });
   }
-  return res.status(400).json({
-    success: false,
-    message: error.message || 'an error occured while handling connection requests'
-  });
 };
 
 
-// remove user connections from connection list
+
+/*
+remove connections from user connections list
+ */ 
 const removeConnection = async(req, res) => {
   const {connectionId} = req.body;
   const {userId} = req.params;
