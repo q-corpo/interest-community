@@ -73,10 +73,10 @@ const viewUserProfile = async(req, res) => {
     };
 
     const userProfile = await User.findById(userId)
-    .populate(hobbies.tags)
-    .populate(interests.tags)
-    .populate(sexuality.tags)
-    .populate(values.tags)
+    .populate('hobbies.tags')
+    .populate('interests.tags')
+    .populate('sexuality.tags')
+    .populate('values.tags')
 
     return res.status(200).json({
       success: true,
@@ -169,7 +169,7 @@ const addConnection = async(req, res) => {
     }
 
     const isAlreadyConnected = thisUser.userConnections.some(conn => 
-      conn.toString() === thisUser.userConnections.toString());
+      conn.toString() === connectId.toString());
 
     if(!isAlreadyConnected){
       thisUser.userConnections.push(connectId);
@@ -177,7 +177,7 @@ const addConnection = async(req, res) => {
       await thisUser.save();
     }
 
-    return res.send(200).json({
+    return res.status(200).json({
       success: true,
       potentialMatches: matchingConnections,
       count: matchingConnections.length,
