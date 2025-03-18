@@ -4,20 +4,6 @@ import Temp from '../models/tempProfile.js';
 import Tag from '../models/tag.js';
 import { createTag, createTags } from '../services/createTag.js';
 
-// const validateUserId = (userId) => {
-//   if(!userId || userId.length === 0){
-//     return {
-//       valid: false,
-//       message: 'user id required'
-//     }
-//   }
-//   return {
-//     valid: true,
-//     message: 'user id received'
-//   };
-// };
-
-
 /*
 create a community
  */ 
@@ -162,9 +148,62 @@ const seePotentialCommunities = async (req, res) => {
 join a community
  */ 
 const joinCommunity = async(req, res)=> {
-  // find the community(ies)
-  // join the community
-  res.send('join a suggested community')
+
+  const {userId} = req.params;
+  const {communityId} = req.body;
+
+  try{
+    if(!userId || userId.length === 0){
+      return res.status(400).json({
+        success: false,
+        message: 'user id required'
+      });
+    };
+
+    if(!communityId || communityId.length === 0){
+      return res.status(400).json({
+        success: false,
+        message: 'community id required'
+      });
+    };
+
+    const thisUser = await User.findById(userId);
+    if(!thisUser){
+      return res.status(404).json({
+        success: false,
+        message: 'user does not exist'
+      });
+    };
+
+    // check if user is already part of the commmunity
+    const communityExist = thisUser.communityConnections.some(connection => connection.toString() === communityId.toString());
+
+    if(communityExist){
+      return res.status(200).json({
+        success: false,
+        message: 'you are already part of this community',
+      });
+    };
+    
+    // join the community
+    const updatedUserCommunities = User.findByIdAndUpdate(
+      userId,
+      {$push: {communityConnections: communityId}},
+      {new: true}
+    )
+
+    return res.status(200).json({
+      success: true,
+      message: 'joined community successfully',
+      communities: updatedUserCommunities.communityConnections,
+    })
+
+  }catch(error){
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    })
+  }
 };
 
 /*
@@ -209,10 +248,59 @@ const seeUserCommunities = async (req, res) => {
 
 
 const leaveCommunity = async(req, res)=> {
-  // find the community
-  // check that user is part of the community
-  // remove user from the community
-  res.send('leave a community')
+  const {userId}= req.params;
+  const {communityId} = req.body;
+
+  try{
+    if(!userId || userId.length === 0){
+      return res.status(400).json({
+        success: false,
+        message: 'user id required'
+      });
+    };
+
+    const thisUser = await User.findById(userId);
+    if(!thisUser){
+      return res.status(404).json({
+        success: false,
+        message: 'user not found'
+      });
+    };
+
+    if(!communityId){
+      return res.status(400).json({
+        success: false,
+        message: 'community id required'
+      });
+    };
+
+
+    const communityExist = await thisUser.communityConnections.some(connection => connection.toString() === communityId.toString());
+    if(!communityExist){
+      return res.status(404).json({
+        success: false,
+        message: 'community does not exist'
+      });
+    };
+
+    const updatedCommunities = await User.findByIdAndUpdate(
+      userId,
+      {$pull: {communityConnections: communityId}},
+      {new: true}
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: 'community removed successfully',
+      communities: updatedCommunities.communityConnections,
+    });
+
+  }catch(error){
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  };
 }
 
 export {
