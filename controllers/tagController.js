@@ -1,14 +1,18 @@
 import User from '../models/user.js';
 import Tag from '../models/tag.js';
 import { createTag, createTags } from '../services/createTag.js';
+import TagRelationship from '../models/tagRelationship.js';
 
 
-/*
-create and add a tag to a user's profile
- */ 
+/**
+ * create and add tag to a user's profile
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const addTag = async(req, res) => {
   const {userId} = req.params;
-  const {tagIds, category} = req.body;
+  const {tagIds, category, parentTagId} = req.body;
   const validCategories = ['hobbies', 'interests', 'sexuality', 'values'];
 
   try{
@@ -42,7 +46,15 @@ const addTag = async(req, res) => {
       category: category
     }
     const result = await createTag(tagData);
-    results.push(result)
+    
+    if(parentTagId && result.tag) {
+      await TagHierarchy.findOneAndUpdate(
+        { parentTag: parentTagId, childTag: result.tag._id },
+        { parentTag: parentTagId, childTag: result.tag._id },
+        { upsert: true }
+      );
+    }
+    results.push(result);
   };
 
   const updatedUser = await User.findByIdAndUpdate(
