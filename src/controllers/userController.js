@@ -1,6 +1,6 @@
-import User from '../models/user.js';
-import Temp from '../models/tempProfile.js';
-import Tag from '../models/tag.js';
+import User from '../src/models/user.js';
+import Temp from '../src/models/tempProfile.js';
+import Tag from '../src/models/tag.js';
 import { matchUserBasedonTags } from '../services/userMatching.js';
 
 
@@ -75,6 +75,7 @@ const viewUserProfile = async(req, res) => {
     const userProfile = await User.findById(userId)
     .populate('hobbies.tags')
     .populate('interests.tags')
+    .populate('politics.tags')
     .populate('sexuality.tags')
     .populate('values.tags')
 
@@ -110,7 +111,7 @@ const seeConnections = async(req, res) => {
     const matchingConnections = await matchUserBasedonTags(
       userId,
       tagIds,
-      categories || ['hobbies', 'interests', 'sexuality', 'values'],
+      categories || ['hobbies', 'interests', 'politics', 'sexuality', 'values'],
       limit || 20
     )
     return res.status(200).json({
@@ -155,7 +156,7 @@ const addConnection = async(req, res) => {
     const matchingConnections = await matchUserBasedonTags(
       userId,
       tagIds,
-      categories || ['hobbies', 'interests', 'sexuality', 'values'],
+      categories || ['hobbies', 'interests', 'politics', 'sexuality', 'values'],
       limit || 20
     )
 

@@ -4,7 +4,7 @@ import Tag from '../models/tag.js';
 import Community from '../models/community.js';
 
 
-const matchUserBasedonTags = async(userId, tagIds, categories=['hobbies', 'interests','sexuality', 'values'], limit = 20) => {
+const matchUserBasedonTags = async(userId, tagIds, categories=['hobbies', 'interests', 'politics', 'sexuality', 'values'], limit = 20) => {
   if(!userId || !tagIds || !Array.isArray(tagIds) || tagIds.length === 0){
     throw new Error('invalid matching parameters')
   }
@@ -20,25 +20,33 @@ const matchUserBasedonTags = async(userId, tagIds, categories=['hobbies', 'inter
 
   if (categories.includes('interests')){
     conditions.push({
-      'hobbies.tags': {$in: tagIds},
-      'hobbies.visibility': true,
-      'allowHobbiesConnection': true
+      'interests.tags': {$in: tagIds},
+      'interests.visibility': true,
+      'allowInterestsConnection': true
+    })
+  }
+
+  if (categories.includes('politics')){
+    conditions.push({
+      'politics.tags': {$in: tagIds},
+      'politics.visibility': true,
+      'allowPoliticsConnection': true
     })
   }
 
   if (categories.includes('sexuality')){
     conditions.push({
-      'hobbies.tags': {$in: tagIds},
-      'hobbies.visibility': true,
-      'allowHobbiesConnection': true
+      'sexuality.tags': {$in: tagIds},
+      'sexuality.visibility': true,
+      'allowSexualityConnection': true
     })
   }
 
   if (categories.includes('values')){
     conditions.push({
-      'hobbies.tags': {$in: tagIds},
-      'hobbies.visibility': true,
-      'allowHobbiesConnection': true
+      'values.tags': {$in: tagIds},
+      'values.visibility': true,
+      'allowValuesConnection': true
     })
   }
 
@@ -46,13 +54,13 @@ const matchUserBasedonTags = async(userId, tagIds, categories=['hobbies', 'inter
     _id: {$ne: userId},
     $or: conditions 
   })
-  .select({username: 1, bio: 1, location: 1, hobbies: 1, interests: 1, sexuality: 1, values: 1})
+  .select({username: 1, bio: 1, location: 1, hobbies: 1, interests: 1, politics: 1, sexuality: 1, values: 1})
   .limit(limit)
 
   const matchUserCount = (await matchingUsers).map(user => {
     const matchCount = 0
 
-    ['hobbies', 'interests', 'sexuality', 'values'].forEach(category =>{
+    ['hobbies', 'interests', 'politics', 'sexuality', 'values'].forEach(category =>{
       if(user[category] && user[category],visibility){
         const userTagIds = user[category].tags.map(tag => tag.toString());
         const matches = tagIds.filter(tagId => userTagIds.includes(tagId));

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const tagSchema = new Schema({
   category: {
     type: String,
-    enum: ['hobbies', 'interests', 'values', 'sexuality'],
+    enum: ['hobbies', 'interests', 'politics', 'sexuality', 'values'],
     index: true
   },
   tag: {

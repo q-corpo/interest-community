@@ -26,11 +26,15 @@ const userSchema = new Schema({
     tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}],
     visibility: Boolean
   },
-  values : {
+  politics : {
     tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}],
     visibility: Boolean
   },
   sexuality : {
+    tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}],
+    visibility: Boolean
+  },
+  values : {
     tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'Tag'}],
     visibility: Boolean
   },
@@ -42,11 +46,15 @@ const userSchema = new Schema({
     type: Boolean,
     default: true
   },
-  allowValuesConnection: {
+  allowPoliticsConnection: {
     type: Boolean,
     default: true
   },
   allowSexualityConnection: {
+    type: Boolean,
+    default: true
+  },
+  allowValuesConnection: {
     type: Boolean,
     default: true
   },

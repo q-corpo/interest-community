@@ -11,7 +11,7 @@ import { getTagswithChildren, searchTags } from "../services/tagSelection";
  */
 const getTagsCategory = async(req, res) => {
   const {category} = req.params;
-  const validCategories = ['hobbies', 'interests', 'sexuality', 'values'];
+  const validCategories = ['hobbies', 'interests', 'politics', 'sexuality', 'values'];
 
   try{
 

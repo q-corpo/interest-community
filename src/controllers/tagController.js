@@ -5,7 +5,7 @@ import TagRelationship from '../models/tagRelationship.js';
 
 
 /**
- * create and add tag to a user's profile
+ * create and add tag to a user's list of tags
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -13,7 +13,7 @@ import TagRelationship from '../models/tagRelationship.js';
 const addTag = async(req, res) => {
   const {userId} = req.params;
   const {tagIds, category, parentTagId} = req.body;
-  const validCategories = ['hobbies', 'interests', 'sexuality', 'values'];
+  const validCategories = ['hobbies', 'interests', 'politics', 'sexuality', 'values'];
 
   try{
 
@@ -84,7 +84,7 @@ remove tags from user profile
 const removeTag = async(req, res)=> {
   const {userId} = req.params;
   const {tagId, category} = req.body;
-  const validCategories = ['hobbies', 'interests', 'sexuality', 'values'];
+  const validCategories = ['hobbies', 'interests', 'politics', 'sexuality', 'values'];
 
   try{
 

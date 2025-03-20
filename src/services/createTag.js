@@ -14,7 +14,7 @@ const createTag = async (tagData) => {
       throw new Error('must include tag')
     }
 // haven't added validation for the tags
-    const validCategories = ['hobbies', 'interests', 'sexuality', 'values'];
+    const validCategories = ['hobbies', 'interests', 'politics', 'sexuality', 'values'];
 
     if(!validCategories.includes(category)){
       throw new Error('category does not exist')
@@ -47,7 +47,7 @@ const createTags = async(tagDatas) => {
       throw new Error('you have not inputted any tag')
     }
 
-    const validCategories = ['hobbies', 'interests', 'sexuality', 'values']
+    const validCategories = ['hobbies', 'interests', 'politics', 'sexuality', 'values']
     if(!validCategories.includes(category)){
       throw new Error(`invalid category for ${tag}`)
     }

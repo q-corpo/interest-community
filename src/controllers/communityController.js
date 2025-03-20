@@ -11,7 +11,7 @@ const createCommunity = async(req, res)=> {
 
   const {userId} = req.params;
   const {name, desc, tagIds, category} = req.body;
-  const validCategories = ['hobbies', 'interests', 'sexuality', 'values']
+  const validCategories = ['hobbies', 'interests','politics', 'sexuality', 'values']
 
   try{
 
@@ -89,7 +89,7 @@ see communities that match your needs, interests, etc.
 const seePotentialCommunities = async (req, res) => {
   const {userId} = req.params;
   const {tagIds, category} = req.body;
-  const validCategories = ['hobbies', 'interests', 'sexuality', 'values']
+  const validCategories = ['hobbies', 'interests', 'politics', 'sexuality', 'values']
 
   try{
 
