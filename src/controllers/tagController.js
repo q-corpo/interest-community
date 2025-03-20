@@ -78,8 +78,11 @@ const addTag = async(req, res) => {
 };
 
 
-/*
-remove tags from user profile
+/**
+ * remove tags from user profile
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
  */ 
 const removeTag = async(req, res)=> {
   const {userId} = req.params;

@@ -57,10 +57,12 @@ const editUserProfile = async(req, res) => {
 };
 
 
-
-/*
-view user profile
- */ 
+/**
+ * view user profile
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const viewUserProfile = async(req, res) => {
   const{userId} = req.params;
 
@@ -93,14 +95,18 @@ const viewUserProfile = async(req, res) => {
 }
 
 
-/*
-find connections based on tags and visibility options
- */ 
-const seeConnections = async(req, res) => {
+/**
+ * find connections based on tags and visibility options
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
+const findConnections = async(req, res) => {
   try{
-    const {userId, tagIds, categories, limit} = req.body
+    const {userId} = req.params;
+    const {tagIds, categories, limit} = req.query
     // validate user input man
-    if(!userId || !tagIds || !Array.isArray(tagIds) || !tagIds.length === 0){
+    if(!userId || !tagIds || !Array.isArray(tagIds) || tagIds.length === 0){
       return res.status(400).json({
         success: false,
         message: 'some parameters are missing'
@@ -263,7 +269,7 @@ const removeConnection = async(req, res) => {
 export  {
   editUserProfile,
   viewUserProfile,
-  seeConnections,
+  findConnections,
   addConnection,
   removeConnection,
 }

@@ -1,6 +1,7 @@
 import express from 'express';
-import { signupUser } from "../controllers/userController";
 const router = express.Router();
 
-
+/**
+ * user routes for write operations
+ */
 

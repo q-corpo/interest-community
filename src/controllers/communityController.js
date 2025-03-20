@@ -4,9 +4,12 @@ import Temp from '../models/tempProfile.js';
 import Tag from '../models/tag.js';
 import { createTag, createTags } from '../services/createTag.js';
 
-/*
-create a community
- */ 
+/**
+ * create a community
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const createCommunity = async(req, res)=> {
 
   const {userId} = req.params;
@@ -83,9 +86,12 @@ const createCommunity = async(req, res)=> {
 }
 
 
-/*
-see communities that match your needs, interests, etc.
- */ 
+/**
+ * see communities that match your visible tags.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const seePotentialCommunities = async (req, res) => {
   const {userId} = req.params;
   const {tagIds, category} = req.body;
@@ -144,9 +150,12 @@ const seePotentialCommunities = async (req, res) => {
   }
 }
 
-/*
-join a community
- */ 
+/**
+ * join a community
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const joinCommunity = async(req, res)=> {
 
   const {userId} = req.params;
@@ -206,9 +215,12 @@ const joinCommunity = async(req, res)=> {
   }
 };
 
-/*
-view your communities
- */ 
+/**
+ * view communities you're part of.
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const seeUserCommunities = async (req, res) => {
   const {userId} = req.params;
 

@@ -43,10 +43,14 @@ const getTagsCategory = async(req, res) => {
   };
 };
 
-
+/**
+ * search for tags before adding new tags if not found
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const searchForTags = async (req, res) => {
-  const {searchTerm} = req.params;
-  const {category} = req.query;
+  const {category, searchTerm} = req.query;
 
   try{
 
@@ -65,7 +69,12 @@ const searchForTags = async (req, res) => {
   };
 };
 
-
+/**
+ * suggest parent tags for a given category
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const suggestParentTag = async(req, res) => {
   const {category, tagName} = req.body;
 
