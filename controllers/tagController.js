@@ -1,5 +1,4 @@
 import User from '../models/user.js';
-import Temp from '../models/tempProfile.js';
 import Tag from '../models/tag.js';
 import { createTag, createTags } from '../services/createTag.js';
 
