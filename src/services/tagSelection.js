@@ -7,7 +7,6 @@ import TagRelationship from '../models/tagRelationship.js';
  * @returns 
  */
 const getTagswithChildren = async (category)=> {
-
   try{
 
     const tags = await Tag.find({category});
@@ -45,9 +44,11 @@ const searchTags = async (searchTerm, category=null) => {
   try{
     
     const query = {$regex: searchTerm, $options: 'i'};
+
     if(category){
-      query.category = category;
+      query = {$and: [{tagName: query.tagName}, {category}]};
     }
+    
     const tags = await Tag.find(query).limit(10);
     return {
       success: true,

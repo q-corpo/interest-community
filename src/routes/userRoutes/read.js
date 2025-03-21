@@ -19,7 +19,7 @@ router.get('/:userId/connections/people', findConnections);
 // view tags and parent relationships if available
 router.get('/tags', getTagsCategory);
 
-// search for tags (prevent duplicate)
+// search for tags (prevent duplicate) *not working
 router.get('/tags', searchForTags)
 
 // see communities that match user's selected tags

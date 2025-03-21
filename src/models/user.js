@@ -56,7 +56,6 @@ const userSchema = new Schema({
     type: Boolean,
     default: true
   },
-  tempProfile:[{type: mongoose.Schema.Types.ObjectId,  ref: 'Temp'}],
   userConnections: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

@@ -4,7 +4,7 @@ import { getTagswithChildren, searchTags } from "../services/tagSelection.js";
 
 
 /**
- * get tags and their children (if available) by provided category
+ * get tags and their children (if available) in the provided category
  * @param {*} req 
  * @param {*} res 
  * @returns 
@@ -50,15 +50,15 @@ const getTagsCategory = async(req, res) => {
  * @returns 
  */
 const searchForTags = async (req, res) => {
-  const {category, searchTerm} = req.query;
+  const {searchTerm, category} = req.query;
 
   try{
 
-    const foundTags = await searchTags(category, searchTerm);
+    const foundTags = await searchTags(searchTerm, category);
     return res.status(200).json({
       success: true,
       message: `${foundTags.length} tags`,
-      tags: result
+      tags: foundTags.tags
     });
 
   }catch(error){

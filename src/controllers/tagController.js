@@ -48,7 +48,7 @@ const addTag = async(req, res) => {
     const result = await createTag(tagData);
     
     if(parentTagId && result.tag) {
-      await TagHierarchy.findOneAndUpdate(
+      await TagRelationship.findOneAndUpdate(
         { parentTag: parentTagId, childTag: result.tag._id },
         { parentTag: parentTagId, childTag: result.tag._id },
         { upsert: true }
