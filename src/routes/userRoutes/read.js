@@ -1,7 +1,7 @@
 import express from 'express';
-import { findConnections, viewUserProfile } from '../../controllers/userController';
-import { getTagsCategory, searchForTags } from '../../controllers/tagSelection';
-import { seePotentialCommunities, seeUserCommunities } from '../../controllers/communityController';
+import { findConnections, viewUserProfile } from '../../controllers/userController.js';
+import { getTagsCategory, searchForTags } from '../../controllers/tagSelection.js';
+import { seePotentialCommunities, seeUserCommunities } from '../../controllers/communityController.js';
 const router = express.Router();
 
 /**
@@ -27,3 +27,5 @@ router.get('/:userId/connections/communities', seePotentialCommunities);
 
 // view the communities user is part of
 router.get('/:userId/commnunities', seeUserCommunities)
+
+export default router;

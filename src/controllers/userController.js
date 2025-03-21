@@ -1,6 +1,5 @@
-import User from '../src/models/user.js';
-import Temp from '../src/models/tempProfile.js';
-import Tag from '../src/models/tag.js';
+import User from '../models/user.js';
+import Tag from '../models/tag.js';
 import { matchUserBasedonTags } from '../services/userMatching.js';
 
 
@@ -137,7 +136,12 @@ const findConnections = async(req, res) => {
 };
 
 
-// user controller for adding connections
+/**
+ * add connections to user list of connections
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ */
 const addConnection = async(req, res) => {
   try{
     const {userId, tagIds, categories, connectId} = req.body;

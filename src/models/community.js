@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import User from './user.js';
-import Tag from './tag.js'
 const Schema = mongoose.Schema;
 
 const communitySchema = new Schema({

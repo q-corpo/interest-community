@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
-import Tag from './tag.js';
-import Temp from './tempProfile.js';
 
 const userSchema = new Schema({
   userName: {

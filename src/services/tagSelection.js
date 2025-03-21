@@ -1,5 +1,5 @@
-import Tag from '../models/tag';
-import TagRelationship from '../models/tagRelationship';
+import Tag from '../models/tag.js';
+import TagRelationship from '../models/tagRelationship.js';
 
 /**
  * get list of tags and return results by relationships

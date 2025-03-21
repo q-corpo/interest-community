@@ -1,6 +1,6 @@
-import Tag from "../models/tag";
-import TagRelationship from "../models/tagRelationship";
-import { getTagswithChildren, searchTags } from "../services/tagSelection";
+import Tag from "../models/tag.js";
+import TagRelationship from "../models/tagRelationship.js";
+import { getTagswithChildren, searchTags } from "../services/tagSelection.js";
 
 
 /**
@@ -10,7 +10,7 @@ import { getTagswithChildren, searchTags } from "../services/tagSelection";
  * @returns 
  */
 const getTagsCategory = async(req, res) => {
-  const {category} = req.params;
+  const {category} = req.query;
   const validCategories = ['hobbies', 'interests', 'politics', 'sexuality', 'values'];
 
   try{
@@ -76,7 +76,7 @@ const searchForTags = async (req, res) => {
  * @returns 
  */
 const suggestParentTag = async(req, res) => {
-  const {category, tagName} = req.body;
+  const {category, tagName} = req.query;
 
   try{
 

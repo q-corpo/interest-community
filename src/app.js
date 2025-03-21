@@ -1,23 +1,18 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
+import readRoutes from './routes/userRoutes/read.js';
+import writeRoutes from './routes/userRoutes/write.js';
+import indexRoutes from './routes/appRoutes/index.js'
 dotenv.config()
 const app = express();
+
+console.log('passing through app.js')
+// mount middleware
 app.use(express.json());
-const PORT = process.env.PORT;
-const uri = process.env.MONGO_URI;
-
-const connect_db = async () => {
-  try {
-    await mongoose.connect(uri).then(() => {
-      console.log('db connected');
-    })
-  }catch(error){
-    console.log(error);
-  }
-}
-connect_db();
-
+app.use('/user', readRoutes);
+app.use('/user', writeRoutes);
+app.use('/', indexRoutes);
 
 
 export default app;
